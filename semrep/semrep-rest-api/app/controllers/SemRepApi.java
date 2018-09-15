@@ -42,20 +42,25 @@ public class SemRepApi extends Controller {
 
     Result process (InputStream is) throws Exception {
         Path temp = Files.createTempFile(work.toPath(), "", ".txt");
+        long size = 0;
         try (FileOutputStream fos = new FileOutputStream (temp.toFile())) {
             byte[] b = new byte[1024];
             for (int nb; (nb = is.read(b)) != -1; ) {
                 fos.write(b, 0, nb);
+                size += nb;
             }
         }
         
         List<String> args = new ArrayList<>();
         args.addAll(semRepExec);
         args.add(temp.toString());
-        
+
+        long start = System.currentTimeMillis();
         Process proc = Runtime.getRuntime().exec(args.toArray(new String[0]));
+        double elapsed = (System.currentTimeMillis() - start)/1000.;
         int status = proc.waitFor();
-        Logger.debug(status+" -- "+args);
+        Logger.debug("SemRep[size="+size+",status="+status+" in "
+                     +String.format("%1$.3fs", elapsed)+" -- "+args);
         if (0 == status) {
             File out = new File (work, temp.getFileName()+".sem.v1.7");
             if (out.exists())
@@ -80,11 +85,14 @@ public class SemRepApi extends Controller {
             }, ec.current());
     }
 
-    @BodyParser.Of(value = BodyParser.Text.class)
+    @BodyParser.Of(value = BodyParser.AnyContent.class)
     public CompletionStage<Result> post () {
         return supplyAsync (() -> {
                 try {
-                    return process (request().body().asText());
+                    String text = request().body().asText();
+                    if (text != null)
+                        return process (text);
+                    return badRequest ("Invalid POST payload!");
                 }
                 catch (Exception ex) {
                     return internalServerError (ex.getMessage());
