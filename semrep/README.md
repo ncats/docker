@@ -34,10 +34,11 @@ docker run --rm --name=semrep-v1.7 \
 ```
 
 Note here we're also exposing MetaMap on port 8066. Now try the
-following on a seperate terminal:
+following on a separate terminal:
 
 ```
-curl -X POST -H Content-Type:text/plain --data-binary "modafinil is a novel stimulant that is effective in the treatment of narcolepsy" localhost:8067/
+curl -X POST -H Content-Type:text/plain \
+     --data-binary "modafinil is a novel stimulant that is effective in the treatment of narcolepsy" localhost:8067/
 ```
 
 You should get something like this as output:
