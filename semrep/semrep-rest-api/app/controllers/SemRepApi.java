@@ -49,6 +49,8 @@ public class SemRepApi extends Controller {
                 fos.write(b, 0, nb);
                 size += nb;
             }
+            PrintStream ps = new PrintStream (fos);
+            ps.println(); // pad newline
         }
         
         List<String> args = new ArrayList<>();
@@ -57,8 +59,8 @@ public class SemRepApi extends Controller {
 
         long start = System.currentTimeMillis();
         Process proc = Runtime.getRuntime().exec(args.toArray(new String[0]));
-        double elapsed = (System.currentTimeMillis() - start)/1000.;
         int status = proc.waitFor();
+        double elapsed = (System.currentTimeMillis() - start)/1000.;        
         Logger.debug("SemRep[size="+size+",status="+status+" in "
                      +String.format("%1$.3fs", elapsed)+" -- "+args);
         if (0 == status) {
