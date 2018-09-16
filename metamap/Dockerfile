@@ -17,5 +17,6 @@ ADD setup.sh $INSTALL
 ADD start.sh /
 WORKDIR $INSTALL/public_mm
 RUN /bin/bash -c '../setup.sh'
+VOLUME $INSTALL
 EXPOSE 8066
 ENTRYPOINT ["/start.sh"]
