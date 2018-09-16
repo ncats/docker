@@ -23,6 +23,5 @@ ADD start.sh /
 ADD semrep-rest-api/build/distributions/playBinary.tar $SEMREP_DIR
 WORKDIR $SEMREP_DIR
 RUN /bin/bash -c '../setup.sh'
-VOLUME $INSTALL
 EXPOSE 8067
 ENTRYPOINT ["/start.sh"]
