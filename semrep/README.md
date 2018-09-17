@@ -14,8 +14,8 @@ cd semrep-rest-api
 ./gradlew dist
 ```
 
-If all goes well, there should be self-contained bundled of the
-API as ```semrep-rest-api/build/distributions/playBinary.tar``` and
+If all goes well, there should be self-contained API bundles
+```semrep-rest-api/build/distributions/playBinary.tar``` and
 ```semrep-rest-api/build/distributions/playBinary.zip```. Now,
 assuming the [MetaMap image](../metamap) has already been built, 
 simply run the following command to start building the SemRep image:
