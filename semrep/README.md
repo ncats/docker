@@ -29,7 +29,7 @@ new image out for a spin as follows:
 
 ```
 docker run --rm --name=semrep-v1.7 \
-       -e APPROVED_HOSTS="['127.0.0.1','172.17.0.1']" \
+       -e ACCEPTED_HOSTS="['127.0.0.1','172.17.0.1']" \
        -p 8066:8066 -p 8067:8067 -t ncats/semrep
 ```
 
