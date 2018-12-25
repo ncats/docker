@@ -20,15 +20,13 @@ docker images
 Now invoking the image as follows:
 
 ```
-docker run --rm -t -e ACCEPTED_HOSTS="['127.0.0.1','172.17.0.1']" -p 8066:8066 ncats/metamap
+docker run --rm -t -p 18066:18066 ncats/metamap
 ```
 
-Make sure to replace ```172.17.0.1``` with the correct host ip as seen
-by your container. If all goes well, you should see something similar
-in your console:
+If all goes well, you should see something similar in your console:
 
 ```
-Server options: [port(8066),accepted_hosts(['127.0.0.1','172.17.0.1'])]
+Server options: [port(8066),accepted_hosts(['127.0.0.1'])]
 Established connection $stream(140567729457696) to TAGGER Server on localhost.
 Options:[lexicon,'Z']
 Args:[db,'2016AA']

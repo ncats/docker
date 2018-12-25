@@ -1,4 +1,5 @@
 #!/bin/sh
+/usr/sbin/nginx
 cd /metamap/public_mm
 ./bin/skrmedpostctl start
 ./bin/wsdserverctl start
